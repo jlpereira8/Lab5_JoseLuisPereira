@@ -342,6 +342,11 @@ public class princi2 extends javax.swing.JFrame {
         popup_agregar_mundo.add(agregar_mundo);
 
         modificar_mundo.setText("Modificar Mundo");
+        modificar_mundo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificar_mundoActionPerformed(evt);
+            }
+        });
         popup_agregar_mundo.add(modificar_mundo);
 
         eliminar_mundo.setText("Eliminar");
@@ -361,6 +366,11 @@ public class princi2 extends javax.swing.JFrame {
         popup_agregar_Criatura.add(jMenuItem1);
 
         jMenuItem2.setText("Modificar");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         popup_agregar_Criatura.add(jMenuItem2);
 
         jMenuItem3.setText("Eliminar");
@@ -531,12 +541,12 @@ public class princi2 extends javax.swing.JFrame {
     private void bt_enviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_enviarMouseClicked
         String sp = tf_objetos.getText();
         String tokens[] = sp.split(",");
-        ArrayList<String> listas = new ArrayList();
+         listas = new ArrayList();
         for (int i = 0; i < tokens.length; i++) {
             listas.add(tokens[i]);
         }
         DefaultListModel modeloli = (DefaultListModel) jl_criaturas.getModel();
-        modeloli.addElement(new Criaturas(tf_raza.getText(), (Integer) tf_energia.getValue(), (Integer) tf_anos.getValue(), tf_region.getText(), (Integer) tf_criaturasvivs.getValue(), listas, (Integer) tf_pesoc.getValue()));
+        modeloli.addElement(new Criaturas(tf_raza.getText(), (Integer) tf_energia.getValue(), (Integer) tf_anos.getValue(), tf_region.getText(), (Integer) tf_criaturasvivs.getValue(), listas, (Integer) tf_pesoc.getValue()));        
         Crear_Criatura.setVisible(false);
 
     }//GEN-LAST:event_bt_enviarMouseClicked
@@ -583,34 +593,34 @@ public class princi2 extends javax.swing.JFrame {
 
          */
         if (jl_criaturas.getSelectedIndex() >= 0) {
-            String pos2=JOptionPane.showInputDialog("Ingrese la posicion ");
+            String pos2 = JOptionPane.showInputDialog("Ingrese la posicion ");
             int pos = Integer.parseInt(pos2);
-            
+
             DefaultTreeModel modeloARBOL = (DefaultTreeModel) jt_arbol.getModel();
             DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloARBOL.getRoot();
-            DefaultListModel modeloLISTA = (DefaultListModel) jl_criaturas.getModel();
+            modeloLISTA = (DefaultListModel) jl_criaturas.getModel();
             String raza;
             int energia;
             int anos;
             String region;
             int vivas;
-            ArrayList<String> obj= new ArrayList();
+            ArrayList<String> obj = new ArrayList();
             int peso;
-            raza=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getRaza();
-            energia=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getEnergia();
-            anos=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getMax_anos();
-            region=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getRegion();
-            vivas=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getC_vivas();
-            obj=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getObjetos();
-            peso=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getPeso_criaturas();
-            
+            raza = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getRaza();
+            energia = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getEnergia();
+            anos = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getMax_anos();
+            region = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getRegion();
+            vivas = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getC_vivas();
+            obj = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getObjetos();
+            peso = ((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getPeso_criaturas();
+
             for (int i = 0; i < raiz.getChildCount(); i++) {
-                
-                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(
-                                    new Criaturas(raza,energia,anos,region,vivas,obj,peso));
-                    ((DefaultMutableTreeNode) raiz.getChildAt(pos)).add(p);                                 
+
+                DefaultMutableTreeNode p = new DefaultMutableTreeNode(
+                        new Criaturas(raza, energia, anos, region, vivas, obj, peso));
+                ((DefaultMutableTreeNode) raiz.getChildAt(pos)).add(p);
             }
-            
+           
             modeloLISTA.clear();
             modeloARBOL.reload();
 
@@ -631,7 +641,7 @@ public class princi2 extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_mundoActionPerformed
 
     private void eliminar_mundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_mundoActionPerformed
-       if (jl_mundo.getSelectedIndex() >= 0) {
+        if (jl_mundo.getSelectedIndex() >= 0) {
             DefaultListModel mod = (DefaultListModel) jl_mundo.getModel();
             mod.remove(jl_mundo.getSelectedIndex());
         }
@@ -659,6 +669,35 @@ public class princi2 extends javax.swing.JFrame {
             mod.remove(jl_criaturas.getSelectedIndex());
         }
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void modificar_mundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_mundoActionPerformed
+        String pos2 = JOptionPane.showInputDialog("Ingrese el nombre que desea modificar ");
+        ((mundo_disco) model.get(jl_mundo.getSelectedIndex())).setNom_tortuga(pos2);
+        String pos23 = JOptionPane.showInputDialog("Ingrese el peso que desea modificar ");
+        int ent = Integer.parseInt(pos23);
+        ((mundo_disco) model.get(jl_mundo.getSelectedIndex())).setPeso_tortu(ent);
+    }//GEN-LAST:event_modificar_mundoActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        String pos2 = JOptionPane.showInputDialog("Ingrese la raza que desea modificar ");
+        String pos21 = JOptionPane.showInputDialog("Ingrese el energia que desea modificar ");
+        String pos22 = JOptionPane.showInputDialog("Ingrese el maximo de anos que desea modificar ");
+        String pos23 = JOptionPane.showInputDialog("Ingrese la region que desea modificar ");
+        String pos24 = JOptionPane.showInputDialog("Ingrese la cantidad de criaturas vivas que desea modificar ");
+        String pos25 = JOptionPane.showInputDialog("Ingrese el peso de las crituras que desea modificar ");
+        int e1 = Integer.parseInt(pos21);
+        int e2 = Integer.parseInt(pos22);
+        int e3 = Integer.parseInt(pos24);
+        int e4= Integer.parseInt(pos25);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setRaza(pos2);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setEnergia(e1);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setMax_anos(e2);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setRegion(pos23);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setC_vivas(e3);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setObjetos(listas);
+        ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setPeso_criaturas(e4);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -756,4 +795,8 @@ public class princi2 extends javax.swing.JFrame {
     mundo_disco mu = new mundo_disco();
     DefaultListModel model;
     DefaultMutableTreeNode nodo_mundo;
+    DefaultListModel modeloLISTA;
+    int criaturas=0;
+    int peso_cria=0;
+    ArrayList<String> listas;
 }
