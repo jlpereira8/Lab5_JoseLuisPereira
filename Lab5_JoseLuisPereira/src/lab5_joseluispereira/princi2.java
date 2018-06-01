@@ -68,6 +68,10 @@ public class princi2 extends javax.swing.JFrame {
         agregar_mundo = new javax.swing.JMenuItem();
         modificar_mundo = new javax.swing.JMenuItem();
         eliminar_mundo = new javax.swing.JMenuItem();
+        popup_agregar_Criatura = new javax.swing.JPopupMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_mundo = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -341,7 +345,31 @@ public class princi2 extends javax.swing.JFrame {
         popup_agregar_mundo.add(modificar_mundo);
 
         eliminar_mundo.setText("Eliminar");
+        eliminar_mundo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_mundoActionPerformed(evt);
+            }
+        });
         popup_agregar_mundo.add(eliminar_mundo);
+
+        jMenuItem1.setText("Agregar");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        popup_agregar_Criatura.add(jMenuItem1);
+
+        jMenuItem2.setText("Modificar");
+        popup_agregar_Criatura.add(jMenuItem2);
+
+        jMenuItem3.setText("Eliminar");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        popup_agregar_Criatura.add(jMenuItem3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -354,6 +382,11 @@ public class princi2 extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jl_mundo);
 
         jl_criaturas.setModel(new DefaultListModel());
+        jl_criaturas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_criaturasMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jl_criaturas);
 
         jl_mundoD.setText("Enviar Mundo ");
@@ -597,6 +630,36 @@ public class princi2 extends javax.swing.JFrame {
         Crear_mundo2.setVisible(true);
     }//GEN-LAST:event_agregar_mundoActionPerformed
 
+    private void eliminar_mundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_mundoActionPerformed
+       if (jl_mundo.getSelectedIndex() >= 0) {
+            DefaultListModel mod = (DefaultListModel) jl_mundo.getModel();
+            mod.remove(jl_mundo.getSelectedIndex());
+        }
+    }//GEN-LAST:event_eliminar_mundoActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Crear_Criatura.setModal(true);//para solo poder a acceder a una ventana
+        Crear_Criatura.pack();
+        Crear_Criatura.setLocationRelativeTo(this);//centra con el frame principal
+        Crear_Criatura.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jl_criaturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_criaturasMouseClicked
+        // TODO add your handling code here:
+        if (evt.isMetaDown()) {
+            popup_agregar_Criatura.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jl_criaturasMouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        if (jl_criaturas.getSelectedIndex() >= 0) {
+            DefaultListModel mod = (DefaultListModel) jl_criaturas.getModel();
+            mod.remove(jl_criaturas.getSelectedIndex());
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -663,6 +726,9 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -671,6 +737,7 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JButton jl_mundoD;
     private javax.swing.JTree jt_arbol;
     private javax.swing.JMenuItem modificar_mundo;
+    private javax.swing.JPopupMenu popup_agregar_Criatura;
     private javax.swing.JPopupMenu popup_agregar_mundo;
     private javax.swing.JSpinner tf_anos;
     private javax.swing.JTextField tf_codigo_universo;
