@@ -7,6 +7,8 @@ package lab5_joseluispereira;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -34,9 +36,9 @@ public class princi2 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         tf_codigo_universo = new javax.swing.JTextField();
-        tf_edad_universo = new javax.swing.JTextField();
         bt_crear_universo = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        tf_edad_universo = new javax.swing.JSpinner();
         Crear_Criatura = new javax.swing.JDialog();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -70,7 +72,7 @@ public class princi2 extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
+        jt_arbol = new javax.swing.JTree();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         c_universo = new javax.swing.JMenuItem();
@@ -84,9 +86,16 @@ public class princi2 extends javax.swing.JFrame {
         jLabel4.setText("Edad del universo");
 
         bt_crear_universo.setText("Enviar");
+        bt_crear_universo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_crear_universoMouseClicked(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel5.setText("Crear Universo");
+
+        tf_edad_universo.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         javax.swing.GroupLayout Crear_mundoLayout = new javax.swing.GroupLayout(Crear_mundo.getContentPane());
         Crear_mundo.getContentPane().setLayout(Crear_mundoLayout);
@@ -103,9 +112,9 @@ public class princi2 extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
-                        .addGroup(Crear_mundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tf_codigo_universo)
-                            .addComponent(tf_edad_universo, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)))
+                        .addGroup(Crear_mundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tf_codigo_universo, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_edad_universo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(Crear_mundoLayout.createSequentialGroup()
                         .addGap(134, 134, 134)
                         .addComponent(jLabel5)))
@@ -120,13 +129,13 @@ public class princi2 extends javax.swing.JFrame {
                 .addGroup(Crear_mundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_codigo_universo, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(Crear_mundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(47, 47, 47)
+                .addGroup(Crear_mundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(tf_edad_universo, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
+                    .addComponent(tf_edad_universo, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(48, 48, 48)
                 .addComponent(bt_crear_universo, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -324,6 +333,11 @@ public class princi2 extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jl_criaturas);
 
         jl_mundoD.setText("Enviar Mundo ");
+        jl_mundoD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_mundoDMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Mundo Disco");
 
@@ -332,8 +346,8 @@ public class princi2 extends javax.swing.JFrame {
         jButton1.setText("Enviar Criaturas");
 
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jScrollPane3.setViewportView(jTree1);
+        jt_arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
+        jScrollPane3.setViewportView(jt_arbol);
 
         jMenu1.setText("Crear");
 
@@ -462,13 +476,37 @@ public class princi2 extends javax.swing.JFrame {
         DefaultListModel modeloli = (DefaultListModel) jl_criaturas.getModel();
         modeloli.addElement(new Criaturas(tf_raza.getText(),(Integer) tf_energia.getValue(), (Integer)tf_anos.getValue(), tf_region.getText(), (Integer)tf_criaturasvivs.getValue(), listas, (Integer)tf_pesoc.getValue()));
         Crear_Criatura.setVisible(false);
+
     }//GEN-LAST:event_bt_enviarMouseClicked
 
     private void enviar_mundoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enviar_mundoMouseClicked
         DefaultListModel model = (DefaultListModel) jl_mundo.getModel();
         model.addElement(new mundo_disco(tf_nom_tortuga.getText(),(Integer)tf_peso_detotr.getValue()));
         Crear_mundo2.setVisible(false);
+        mu.setNom_tortuga(tf_nom_tortuga.getText());
+        mu.setPeso_tortu((Integer)tf_peso_detotr.getValue());
     }//GEN-LAST:event_enviar_mundoMouseClicked
+
+    private void bt_crear_universoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crear_universoMouseClicked
+        universo u=new universo();
+        u.setCodigo_uni(tf_codigo_universo.getText());
+        u.setEdad_uni((Integer)tf_edad_universo.getValue());
+        c++;
+        c_universo.setEnabled(false);
+        Crear_mundo.dispose();
+    }//GEN-LAST:event_bt_crear_universoMouseClicked
+
+    private void jl_mundoDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_mundoDMouseClicked
+        // TODO add your handling code here:
+        //String raza, int energia, int max_anos, String region, int c_vivas, ArrayList<String> objetos, int peso_criaturas
+        
+        DefaultTreeModel m = (DefaultTreeModel) jt_arbol.getModel();//porque el ()
+        DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
+        //DefaultMutableTreeNode nodo_mundo=new DefaultMutableTreeNode(new Criaturas(c.getRaza(),c.getEnergia(),c.getMax_anos(),c.getRegion(),c.getC_vivas(),c.getObjetos(),c.getPeso_criaturas()));
+        DefaultMutableTreeNode nodo_mundo=new DefaultMutableTreeNode(new mundo_disco(mu.getNom_tortuga(),mu.getPeso_tortu()));
+        raiz.add(nodo_mundo);
+        m.reload();
+    }//GEN-LAST:event_jl_mundoDMouseClicked
 
     /**
      * @param args the command line arguments
@@ -537,14 +575,14 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTree jTree1;
     private javax.swing.JList<String> jl_criaturas;
     private javax.swing.JList<String> jl_mundo;
     private javax.swing.JButton jl_mundoD;
+    private javax.swing.JTree jt_arbol;
     private javax.swing.JSpinner tf_anos;
     private javax.swing.JTextField tf_codigo_universo;
     private javax.swing.JSpinner tf_criaturasvivs;
-    private javax.swing.JTextField tf_edad_universo;
+    private javax.swing.JSpinner tf_edad_universo;
     private javax.swing.JSpinner tf_energia;
     private javax.swing.JTextField tf_nom_tortuga;
     private javax.swing.JTextField tf_objetos;
@@ -554,5 +592,6 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JTextField tf_region;
     // End of variables declaration//GEN-END:variables
     //ArrayList<Criaturas> l_criaturas=new ArrayList();
-
+    int c=0;
+    mundo_disco mu= new mundo_disco();
 }
