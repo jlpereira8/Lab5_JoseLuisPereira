@@ -11,12 +11,9 @@ import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
-/**
- *
- * @author j0c3lwiz
- */
-public class princi2 extends javax.swing.JFrame {
 
+public class princi2 extends javax.swing.JFrame {
+static int p_tot=0;
     /**
      * Creates new form princi2
      */
@@ -841,6 +838,6 @@ public class princi2 extends javax.swing.JFrame {
     DefaultListModel model;
     DefaultMutableTreeNode nodo_mundo;
     DefaultListModel modeloLISTA;
-    int p_tot=0;
+    
     ArrayList<String> listas;
 }
