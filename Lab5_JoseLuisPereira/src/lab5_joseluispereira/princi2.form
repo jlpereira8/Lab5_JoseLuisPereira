@@ -422,6 +422,32 @@
         </Component>
       </SubComponents>
     </Container>
+    <Container class="javax.swing.JPopupMenu" name="popup_agregar_mundo">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
+        <Property name="useNullLayout" type="boolean" value="true"/>
+      </Layout>
+      <SubComponents>
+        <MenuItem class="javax.swing.JMenuItem" name="agregar_mundo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Agregar Mundo"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="agregar_mundoActionPerformed"/>
+          </Events>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="modificar_mundo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modificar Mundo"/>
+          </Properties>
+        </MenuItem>
+        <MenuItem class="javax.swing.JMenuItem" name="eliminar_mundo">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eliminar"/>
+          </Properties>
+        </MenuItem>
+      </SubComponents>
+    </Container>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -511,10 +537,10 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="153" max="-2" attributes="0"/>
           </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="229" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -538,9 +564,9 @@
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="146" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace pref="30" max="32767" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="186" max="-2" attributes="0"/>
-              <EmptySpace pref="74" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -559,6 +585,9 @@
               <Connection code="new DefaultListModel()" type="code"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jl_mundoMouseClicked"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
@@ -606,6 +635,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Enviar Criaturas"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
       <AuxValues>
@@ -617,7 +649,7 @@
         <Component class="javax.swing.JTree" name="jt_arbol">
           <Properties>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.editors2.TreeModelEditor">
-              <TreeModel code=""/>
+              <TreeModel code="Universo&#xa; "/>
             </Property>
           </Properties>
         </Component>

@@ -7,6 +7,7 @@ package lab5_joseluispereira;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
@@ -63,6 +64,10 @@ public class princi2 extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         enviar_mundo = new javax.swing.JButton();
         tf_peso_detotr = new javax.swing.JSpinner();
+        popup_agregar_mundo = new javax.swing.JPopupMenu();
+        agregar_mundo = new javax.swing.JMenuItem();
+        modificar_mundo = new javax.swing.JMenuItem();
+        eliminar_mundo = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_mundo = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -324,9 +329,28 @@ public class princi2 extends javax.swing.JFrame {
                 .addGap(33, 33, 33))
         );
 
+        agregar_mundo.setText("Agregar Mundo");
+        agregar_mundo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregar_mundoActionPerformed(evt);
+            }
+        });
+        popup_agregar_mundo.add(agregar_mundo);
+
+        modificar_mundo.setText("Modificar Mundo");
+        popup_agregar_mundo.add(modificar_mundo);
+
+        eliminar_mundo.setText("Eliminar");
+        popup_agregar_mundo.add(eliminar_mundo);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jl_mundo.setModel(new DefaultListModel());
+        jl_mundo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jl_mundoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jl_mundo);
 
         jl_criaturas.setModel(new DefaultListModel());
@@ -344,8 +368,13 @@ public class princi2 extends javax.swing.JFrame {
         jLabel2.setText("Criaturas");
 
         jButton1.setText("Enviar Criaturas");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("root");
+        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Universo");
         jt_arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane3.setViewportView(jt_arbol);
 
@@ -404,10 +433,10 @@ public class princi2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(153, 153, 153))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(185, 185, 185)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(204, 204, 204))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -425,9 +454,9 @@ public class princi2 extends javax.swing.JFrame {
                             .addComponent(jl_mundoD)
                             .addComponent(jButton1)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addGap(62, 62, 62))
         );
 
         pack();
@@ -450,13 +479,13 @@ public class princi2 extends javax.swing.JFrame {
 •	Cantidad vivas de esa especie.
 •	Lista de nombres de objetos mágicos propios de esas criaturas(puede estar vacía).
 •	Peso criaturas
-        */
+         */
         //String raza, int energia, int max_anos, String region, int c_vivas, ArrayList<String> objetos, int peso_criaturas
         Crear_Criatura.setModal(true);//para solo poder a acceder a una ventana
         Crear_Criatura.pack();
         Crear_Criatura.setLocationRelativeTo(this);
         Crear_Criatura.setVisible(true);
-        
+
     }//GEN-LAST:event_c_criaturaActionPerformed
 
     private void c_mundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_mundoActionPerformed
@@ -467,30 +496,30 @@ public class princi2 extends javax.swing.JFrame {
     }//GEN-LAST:event_c_mundoActionPerformed
 
     private void bt_enviarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_enviarMouseClicked
-        String sp=tf_objetos.getText();
-        String tokens[]=sp.split(",");
-        ArrayList<String> listas=new ArrayList();
+        String sp = tf_objetos.getText();
+        String tokens[] = sp.split(",");
+        ArrayList<String> listas = new ArrayList();
         for (int i = 0; i < tokens.length; i++) {
             listas.add(tokens[i]);
         }
         DefaultListModel modeloli = (DefaultListModel) jl_criaturas.getModel();
-        modeloli.addElement(new Criaturas(tf_raza.getText(),(Integer) tf_energia.getValue(), (Integer)tf_anos.getValue(), tf_region.getText(), (Integer)tf_criaturasvivs.getValue(), listas, (Integer)tf_pesoc.getValue()));
+        modeloli.addElement(new Criaturas(tf_raza.getText(), (Integer) tf_energia.getValue(), (Integer) tf_anos.getValue(), tf_region.getText(), (Integer) tf_criaturasvivs.getValue(), listas, (Integer) tf_pesoc.getValue()));
         Crear_Criatura.setVisible(false);
 
     }//GEN-LAST:event_bt_enviarMouseClicked
 
     private void enviar_mundoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_enviar_mundoMouseClicked
-        DefaultListModel model = (DefaultListModel) jl_mundo.getModel();
-        model.addElement(new mundo_disco(tf_nom_tortuga.getText(),(Integer)tf_peso_detotr.getValue()));
+        model = (DefaultListModel) jl_mundo.getModel();
+        model.addElement(new mundo_disco(tf_nom_tortuga.getText(), (Integer) tf_peso_detotr.getValue()));
         Crear_mundo2.setVisible(false);
         mu.setNom_tortuga(tf_nom_tortuga.getText());
-        mu.setPeso_tortu((Integer)tf_peso_detotr.getValue());
+        mu.setPeso_tortu((Integer) tf_peso_detotr.getValue());
     }//GEN-LAST:event_enviar_mundoMouseClicked
 
     private void bt_crear_universoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_crear_universoMouseClicked
-        universo u=new universo();
+        universo u = new universo();
         u.setCodigo_uni(tf_codigo_universo.getText());
-        u.setEdad_uni((Integer)tf_edad_universo.getValue());
+        u.setEdad_uni((Integer) tf_edad_universo.getValue());
         c++;
         c_universo.setEnabled(false);
         Crear_mundo.dispose();
@@ -499,14 +528,74 @@ public class princi2 extends javax.swing.JFrame {
     private void jl_mundoDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_mundoDMouseClicked
         // TODO add your handling code here:
         //String raza, int energia, int max_anos, String region, int c_vivas, ArrayList<String> objetos, int peso_criaturas
-        
         DefaultTreeModel m = (DefaultTreeModel) jt_arbol.getModel();//porque el ()
         DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) m.getRoot();
         //DefaultMutableTreeNode nodo_mundo=new DefaultMutableTreeNode(new Criaturas(c.getRaza(),c.getEnergia(),c.getMax_anos(),c.getRegion(),c.getC_vivas(),c.getObjetos(),c.getPeso_criaturas()));
-        DefaultMutableTreeNode nodo_mundo=new DefaultMutableTreeNode(new mundo_disco(mu.getNom_tortuga(),mu.getPeso_tortu()));
+        nodo_mundo = new DefaultMutableTreeNode(new mundo_disco(mu.getNom_tortuga(), mu.getPeso_tortu()));
         raiz.add(nodo_mundo);
+        model.clear();
         m.reload();
     }//GEN-LAST:event_jl_mundoDMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        /*
+        Nombre de la raza.
+•	Numero de energía.
+•	Número máximo de años.
+•	Nombre de la región.
+•	Cantidad vivas de esa especie.
+•	Lista de nombres de objetos mágicos propios de esas criaturas(puede estar vacía).
+•	Peso criaturas
+
+         */
+        if (jl_criaturas.getSelectedIndex() >= 0) {
+            String pos2=JOptionPane.showInputDialog("Ingrese la posicion ");
+            int pos = Integer.parseInt(pos2);
+            
+            DefaultTreeModel modeloARBOL = (DefaultTreeModel) jt_arbol.getModel();
+            DefaultMutableTreeNode raiz = (DefaultMutableTreeNode) modeloARBOL.getRoot();
+            DefaultListModel modeloLISTA = (DefaultListModel) jl_criaturas.getModel();
+            String raza;
+            int energia;
+            int anos;
+            String region;
+            int vivas;
+            ArrayList<String> obj= new ArrayList();
+            int peso;
+            raza=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getRaza();
+            energia=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getEnergia();
+            anos=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getMax_anos();
+            region=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getRegion();
+            vivas=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getC_vivas();
+            obj=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getObjetos();
+            peso=((Criaturas) modeloLISTA.get(jl_criaturas.getSelectedIndex())).getPeso_criaturas();
+            
+            for (int i = 0; i < raiz.getChildCount(); i++) {
+                
+                    DefaultMutableTreeNode p = new DefaultMutableTreeNode(
+                                    new Criaturas(raza,energia,anos,region,vivas,obj,peso));
+                    ((DefaultMutableTreeNode) raiz.getChildAt(pos)).add(p);                                 
+            }
+            
+            modeloLISTA.clear();
+            modeloARBOL.reload();
+
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jl_mundoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_mundoMouseClicked
+        if (evt.isMetaDown()) {
+            popup_agregar_mundo.show(evt.getComponent(), evt.getX(), evt.getY());
+        }
+    }//GEN-LAST:event_jl_mundoMouseClicked
+
+    private void agregar_mundoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_mundoActionPerformed
+        Crear_mundo2.setModal(true);//para solo poder a acceder a una ventana
+        Crear_mundo2.pack();
+        Crear_mundo2.setLocationRelativeTo(this);//centra con el frame principal
+        Crear_mundo2.setVisible(true);
+    }//GEN-LAST:event_agregar_mundoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -547,11 +636,13 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JDialog Crear_Criatura;
     private javax.swing.JDialog Crear_mundo;
     private javax.swing.JDialog Crear_mundo2;
+    private javax.swing.JMenuItem agregar_mundo;
     private javax.swing.JButton bt_crear_universo;
     private javax.swing.JButton bt_enviar;
     private javax.swing.JMenuItem c_criatura;
     private javax.swing.JMenuItem c_mundo;
     private javax.swing.JMenuItem c_universo;
+    private javax.swing.JMenuItem eliminar_mundo;
     private javax.swing.JButton enviar_mundo;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -579,6 +670,8 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JList<String> jl_mundo;
     private javax.swing.JButton jl_mundoD;
     private javax.swing.JTree jt_arbol;
+    private javax.swing.JMenuItem modificar_mundo;
+    private javax.swing.JPopupMenu popup_agregar_mundo;
     private javax.swing.JSpinner tf_anos;
     private javax.swing.JTextField tf_codigo_universo;
     private javax.swing.JSpinner tf_criaturasvivs;
@@ -592,6 +685,8 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JTextField tf_region;
     // End of variables declaration//GEN-END:variables
     //ArrayList<Criaturas> l_criaturas=new ArrayList();
-    int c=0;
-    mundo_disco mu= new mundo_disco();
+    int c = 0;
+    mundo_disco mu = new mundo_disco();
+    DefaultListModel model;
+    DefaultMutableTreeNode nodo_mundo;
 }
