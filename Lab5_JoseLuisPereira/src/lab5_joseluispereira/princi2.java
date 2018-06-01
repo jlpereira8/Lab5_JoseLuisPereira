@@ -72,6 +72,8 @@ public class princi2 extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
+        nepe = new javax.swing.JPopupMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jScrollPane1 = new javax.swing.JScrollPane();
         jl_mundo = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -82,6 +84,7 @@ public class princi2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jt_arbol = new javax.swing.JTree();
+        feaf = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         c_universo = new javax.swing.JMenuItem();
@@ -381,6 +384,14 @@ public class princi2 extends javax.swing.JFrame {
         });
         popup_agregar_Criatura.add(jMenuItem3);
 
+        jMenuItem4.setText("jMenuItem4");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        nepe.add(jMenuItem4);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jl_mundo.setModel(new DefaultListModel());
@@ -420,6 +431,13 @@ public class princi2 extends javax.swing.JFrame {
         javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("Universo");
         jt_arbol.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane3.setViewportView(jt_arbol);
+
+        feaf.setText("Mostrar peso");
+        feaf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                feafMouseClicked(evt);
+            }
+        });
 
         jMenu1.setText("Crear");
 
@@ -477,8 +495,13 @@ public class princi2 extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addGap(153, 153, 153))
             .addGroup(layout.createSequentialGroup()
-                .addGap(185, 185, 185)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(185, 185, 185)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(255, 255, 255)
+                        .addComponent(feaf)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -499,7 +522,9 @@ public class princi2 extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(feaf)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -512,6 +537,12 @@ public class princi2 extends javax.swing.JFrame {
         Crear_mundo.setVisible(true);
     }//GEN-LAST:event_c_universoActionPerformed
 
+    public void weigth(int x){
+        p_tot+=x; 
+    }
+    
+    
+    
     private void c_criaturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_c_criaturaActionPerformed
         // TODO add your handling code here:
         /*
@@ -578,6 +609,7 @@ public class princi2 extends javax.swing.JFrame {
         raiz.add(nodo_mundo);
         model.clear();
         m.reload();
+        weigth(mu.getPeso_tortu());
     }//GEN-LAST:event_jl_mundoDMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -620,7 +652,7 @@ public class princi2 extends javax.swing.JFrame {
                         new Criaturas(raza, energia, anos, region, vivas, obj, peso));
                 ((DefaultMutableTreeNode) raiz.getChildAt(pos)).add(p);
             }
-           
+            weigth(peso);
             modeloLISTA.clear();
             modeloARBOL.reload();
 
@@ -680,7 +712,7 @@ public class princi2 extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
-        String pos2 = JOptionPane.showInputDialog("Ingrese la raza que desea modificar ");
+       /* String pos2 = JOptionPane.showInputDialog("Ingrese la raza que desea modificar ");
         String pos21 = JOptionPane.showInputDialog("Ingrese el energia que desea modificar ");
         String pos22 = JOptionPane.showInputDialog("Ingrese el maximo de anos que desea modificar ");
         String pos23 = JOptionPane.showInputDialog("Ingrese la region que desea modificar ");
@@ -697,7 +729,17 @@ public class princi2 extends javax.swing.JFrame {
         ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setC_vivas(e3);
         ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setObjetos(listas);
         ((Criaturas) model.get(jl_criaturas.getSelectedIndex())).setPeso_criaturas(e4);
+        */
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        //JOptionPane.showMessageDialog(this, "Peso Universal"+p_tot);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void feafMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feafMouseClicked
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(this, "Peso Universal"+p_tot);
+    }//GEN-LAST:event_feafMouseClicked
 
     /**
      * @param args the command line arguments
@@ -746,6 +788,7 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem c_universo;
     private javax.swing.JMenuItem eliminar_mundo;
     private javax.swing.JButton enviar_mundo;
+    private javax.swing.JButton feaf;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -768,6 +811,7 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -776,6 +820,7 @@ public class princi2 extends javax.swing.JFrame {
     private javax.swing.JButton jl_mundoD;
     private javax.swing.JTree jt_arbol;
     private javax.swing.JMenuItem modificar_mundo;
+    private javax.swing.JPopupMenu nepe;
     private javax.swing.JPopupMenu popup_agregar_Criatura;
     private javax.swing.JPopupMenu popup_agregar_mundo;
     private javax.swing.JSpinner tf_anos;
@@ -796,7 +841,6 @@ public class princi2 extends javax.swing.JFrame {
     DefaultListModel model;
     DefaultMutableTreeNode nodo_mundo;
     DefaultListModel modeloLISTA;
-    int criaturas=0;
-    int peso_cria=0;
+    int p_tot=0;
     ArrayList<String> listas;
 }
